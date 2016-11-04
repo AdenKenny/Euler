@@ -1,4 +1,5 @@
 import math
+from problems import Util
 
 """
 If we list all the natural numbers below 10 that are multiples
@@ -56,7 +57,7 @@ What is the largest prime factor of the number 600851475143 ?
 """
 
 
-def question_3():
+def question_3() -> int:
 	target = 600851475143
 	upper_bound = int(math.sqrt(target))
 	
@@ -64,21 +65,55 @@ def question_3():
 	
 	for i in range(1, upper_bound):
 		if target % i == 0:
-			if is_prime(i):
+			if Util.Util.is_prime(i):
 				highest = i
 	
 	return highest
 
+"""
+A palindromic number reads the same both ways. The largest
+palindrome made from the product of two 2-digit numbers
+is 9009 = 91 × 99.
 
-def is_prime(n: int) -> bool:
-	for i in range(2, int(n ** 0.5) + 1):
-		if n % i == 0:
-			return False
+Find the largest palindrome made from the product of two 3-digit
+numbers.
+"""
+
+
+def question_4() -> int:
 	
-	return True
+	highest = 0
+	
+	for i in range(100, 999):
+		for j in range(100, 999):
+			prod = i * j
+			if Util.Util.is_pal(prod):
+				if prod > highest:
+					highest = prod
+	
+	return highest
+	
+"""
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+"""
 
 
+def question_5() -> int:
+	for i in range(20, 100000000):
+		
+		is_good = True
+		
+		for j in range(1, 20):
+			if i % j != 0:
+				is_good = False
+		
+		if is_good:
+			return i
+		
+		
 def main():
-	print(question_3())
+	print(question_5())
 
 main()

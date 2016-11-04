@@ -27,6 +27,30 @@ long long question3() {
 	return highest;
 }
 
+int question5() {
+	for (long i = 2521; i < 100000000; i++) {
+		
+		
+		for (int j = 1; j <= 20; j++) {
+			if ((i % j) == 0) {
+				
+			}
+
+			else {
+				break;
+			}
+
+			return i;
+		}
+
+
+
+		
+   }
+	return 0;
+	
+}
+
 bool isPrime(int number) {
 	if (number < 2) {
 		return false;
@@ -50,7 +74,11 @@ bool isPrime(int number) {
 }
 
 int main() {
-	cout << question3();
+	cout << question5();
+
+	int tmp;
+
+	cin >> tmp;
 
 	return 0;
 }
