@@ -3,12 +3,13 @@
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>  
+#include <unordered_map>
+
+typedef unsigned __int64 uint;
 
 using namespace std;
 
 bool isPrime(int a);
-bool isPyTrip(int a, int b, int c);
-int nextSeq(int n);
 
 int question3() {
 	long long target = 600851475143;
@@ -46,7 +47,17 @@ int question9() {
 		for (int b = 1; b < 500; ++b) {
 			for (int c = 1; c < 500; ++c) {
 				if ((a + b + c) == 1000) {
-					if (isPyTrip(a, b, c)) {
+					
+					auto lambda = [&a, &b, &c] (int, int, int) {
+						int sum = (a * a) + (b * b);
+						if ((a * a) + (b * b) == (c * c)) {
+							return true;
+						}
+
+						return false;
+					};
+					
+					if (lambda(a, b, c)) {
 						return (a * b * c);
 					}
 				}
@@ -62,12 +73,21 @@ int question14() {
 	int maxLen = 0;
 	int retVal = 0;
 
-	for (int i = 0; i < 1000000; i++) {
-		
+	for (int i = 1; i < 1000000; ++i) {
+				
 		int len = 0;
-		int numb = i;
+		uint numb = i;
+		auto lambda = [&numb] (uint) {
+			if (numb % 2 == 0) {
+				return numb / 2;
+			}
+			else {
+				return (3 * numb) + 1;
+			}
+		};
+
 		while (numb != 1) {
-			numb = nextSeq(numb);
+			numb = lambda(numb);
 			len++;
 		}
 
@@ -80,26 +100,11 @@ int question14() {
 	return retVal;
 }
 
-int nextSeq(int numb) {
+int question17() {
 	
-	if (numb % 2 == 0) {
-		return numb / 2;
-	}
+	unordered_map<int, int> letters = {};
 
-	else {
-		return (3 * numb) + 1;
-	}
-}
-
-bool isPyTrip(int a, int b, int c) {
-	
-	int sum = (a * a) + (b * b);
-
-	if (sum == (c * c)) {
-		return true;
-	}
-	
-	return false;
+	return 0;
 }
 
 bool isPrime(int number) {
@@ -125,7 +130,7 @@ bool isPrime(int number) {
 }
 
 int main() {
-	cout << question14();
+	cout << question17();
 
 	int tmp;
 

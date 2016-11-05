@@ -266,7 +266,24 @@ def question_13() -> int:
 	return int(full_numb[0:10])
 
 
+def question_16() -> int:
+	numb = 2 ** 1000
+	
+	numb = str(numb)
+	
+	t_sum = 0
+	for sub_str in numb:
+		t_sum += int(sub_str)
+	
+	return t_sum
+
+
+def question_17():
+	letters = {1: 3, 2: 3, 3: 5, 4: 4, 5: 4 }
+
+
 def main():
-	print(question_13())
+	print(question_17())
+
 
 main()
