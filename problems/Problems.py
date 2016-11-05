@@ -129,10 +129,43 @@ def question_6() -> int:
 
 
 def question_7() -> int:
+	
+	numb = 0
+	target = 10001
+	
+	for i in range(2, 1000000):
+		if Util.Util.is_prime(i):
+			numb += 1
+			if numb == target:
+				return i
+			
+			
+def question_8() -> int:
+	num = 0  # Number omitted as is 1000 digits.
+
+	prod = 1
+	max_prod = 0
+	
+	num_str = str(num)
+	
+	length = len(num_str)
+	
+	for i in range(1, length - 13 + 1):
+		prod = 1
+		for j in range(i, i + 13):
+			prod *= int(num_str[j - 1: j])
+			
+			if prod > max_prod:
+				max_prod = prod
+	
+	return max_prod
+
+
+def question_9() -> int:
 	pass
 
 
 def main():
-	print(question_6())
+	print(question_8())
 
 main()
