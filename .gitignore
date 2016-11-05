@@ -395,3 +395,8 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
+
+/bin/
+/.classpath
+/.project
+/questions.synctex.gz

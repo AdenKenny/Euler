@@ -1,5 +1,5 @@
 import math
-from problems import Util
+from pythonSolutions import Util
 
 """
 If we list all the natural numbers below 10 that are multiples
@@ -123,8 +123,6 @@ def question_6() -> int:
 
 	sum_of_numbers = (target * (target + 1)) / 2
 		
-	print(sum_of_numbers)
-
 	return (sum_of_numbers * sum_of_numbers) - sum_of_squares
 
 
@@ -141,7 +139,7 @@ def question_7() -> int:
 			
 			
 def question_8() -> int:
-	num = 0  # Number omitted as is 1000 digits.
+	num = 0 # Number omitted as is 1000 digits.
 
 	prod = 1
 	max_prod = 0
@@ -159,10 +157,6 @@ def question_8() -> int:
 				max_prod = prod
 	
 	return max_prod
-
-
-def question_9() -> int:
-	pass
 
 
 def main():
