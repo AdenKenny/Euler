@@ -101,19 +101,38 @@ What is the smallest positive number that is evenly divisible by all of the numb
 
 
 def question_5() -> int:
-	for i in range(20, 100000000):
+	
+	primes = (2, 11, 13, 17, 19)
+
+	initial = 2520
 		
-		is_good = True
+	for prime in primes:
+		initial *= prime
 		
-		for j in range(1, 20):
-			if i % j != 0:
-				is_good = False
+	return initial
 		
-		if is_good:
-			return i
+
+def question_6() -> int:
+	
+	target = 100
+	
+	sum_of_squares = 0
+	
+	for i in range(1, target + 1):
+		sum_of_squares += (i * i)
+
+	sum_of_numbers = (target * (target + 1)) / 2
 		
-		
+	print(sum_of_numbers)
+
+	return (sum_of_numbers * sum_of_numbers) - sum_of_squares
+
+
+def question_7() -> int:
+	pass
+
+
 def main():
-	print(question_5())
+	print(question_6())
 
 main()

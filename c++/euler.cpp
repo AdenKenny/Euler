@@ -5,12 +5,13 @@
 #include <vector>
 #include <stdio.h>
 #include <iostream>
+#include <algorithm>  
 
 using namespace std;
 
 bool isPrime(int a);
 
-long long question3() {
+int question3() {
 	long long target = 600851475143;
 	int upperBound = sqrt(target);
 
@@ -28,27 +29,17 @@ long long question3() {
 }
 
 int question5() {
-	for (long i = 2521; i < 100000000; i++) {
-		
-		
-		for (int j = 1; j <= 20; j++) {
-			if ((i % j) == 0) {
-				
-			}
 
-			else {
-				break;
-			}
+	vector<int> primes = {2, 11, 13, 17, 19};
 
-			return i;
-		}
+	int initial = 2520;
 
+	for (int &prime : primes) {
+		initial *= prime;
+	}
 
+	return initial;
 
-		
-   }
-	return 0;
-	
 }
 
 bool isPrime(int number) {
