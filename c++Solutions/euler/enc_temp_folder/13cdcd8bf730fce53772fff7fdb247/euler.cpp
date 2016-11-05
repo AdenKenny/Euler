@@ -38,6 +38,7 @@ int question5() {
 	}
 
 	return initial;
+
 }
 
 int question9() {
@@ -77,6 +78,8 @@ int question14() {
 		}
 	}
 	
+	
+
 	return retVal;
 }
 
