@@ -10,6 +10,7 @@ typedef unsigned __int64 uint;
 using namespace std;
 
 bool isPrime(int a);
+long sumOf(int a);
 
 int question3() {
 	long long target = 600851475143;
@@ -68,6 +69,31 @@ int question9() {
 	return 0;
 }
 
+int question12() {
+
+	vector<long> triangles;
+
+	for (int i = 12000; i < 20000; ++i) {
+		triangles.push_back(sumOf(i));
+	}
+
+	for (long &triangle : triangles) {
+		int factors = 0;
+
+		for (long i = 1; i < (triangle / 2) + 1; ++i) {
+			if (triangle % i == 0) {
+				factors++;
+			}
+		}
+
+		if (factors >= 500) {
+			return triangle;
+		}
+	}
+
+	return 0;
+}
+
 int question14() {
 	
 	int maxLen = 0;
@@ -100,11 +126,32 @@ int question14() {
 	return retVal;
 }
 
-int question17() {
-	
-	unordered_map<int, int> letters = {};
+int question19() {
 
-	return 0;
+	int totalDays = 0;
+	for (int i = 1901; i <= 2000; ++i) {
+		if (i % 4 == 0) {
+			totalDays += 366;
+		}
+
+		else {
+			totalDays += 365;
+		}
+	}
+
+	int numbSundays = 0;
+	for (int i = 1; i <= totalDays; ++i) {
+		if (i % 7 == 0) {
+			numbSundays++;
+		}
+	}
+
+	return numbSundays;
+}
+
+
+long sumOf(int n) {
+	return (n * (n + 1)) / 2;
 }
 
 bool isPrime(int number) {
@@ -130,7 +177,7 @@ bool isPrime(int number) {
 }
 
 int main() {
-	cout << question17();
+	cout << question19();
 
 	int tmp;
 
