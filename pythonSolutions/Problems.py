@@ -307,6 +307,6 @@ def question_18() -> int:
 
 def main():
 	print(question_17())
-
+	print(pow(-1, 0.5))
 
 main()

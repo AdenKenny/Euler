@@ -177,11 +177,11 @@ bool isPrime(int number) {
 }
 
 int main() {
-	cout << question19();
+	cout << question19() << endl;
 
-	int tmp;
+	int holder;
 
-	cin >> tmp;
+	cin >> holder;
 
 	return 0;
 }
