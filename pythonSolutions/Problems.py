@@ -304,6 +304,15 @@ def question_18() -> int:
 	for i in row2:
 		total = 1
 
+		
+def question_20() -> int:
+	target = 100
+
+	total_fact = math.factorial(target)
+	fact_str = str(total_fact)
+
+	return sum((int(x) for x in fact_str))
+
 
 def main():
 	print(question_17())

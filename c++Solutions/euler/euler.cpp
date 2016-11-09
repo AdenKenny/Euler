@@ -149,6 +149,18 @@ int question19() {
 	return numbSundays;
 }
 
+int question20() {
+	int target = 100;
+
+	uint sum = 0;
+	for(int i = 1; i < target; ++i) {
+		for(int j = 1; j < i; ++j) {
+			sum += j
+		}
+	}
+
+	return 0;
+}
 
 long sumOf(int n) {
 	return (n * (n + 1)) / 2;
