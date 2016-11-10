@@ -1,18 +1,6 @@
 #include "stdafx.h"
-#include <vector>
-#include <stdio.h>
-#include <iostream>
-#include <algorithm>  
-#include <unordered_map>
 
-typedef unsigned __int64 uint;
-
-using namespace std;
-
-bool isPrime(int a);
-long sumOf(int a);
-
-int question3() {
+int Euler::question3() {
 	long long target = 600851475143;
 	int upperBound = sqrt(target);
 
@@ -29,9 +17,9 @@ int question3() {
 	return highest;
 }
 
-int question5() {
+int Euler::question5() {
 
-	vector<int> primes = {2, 11, 13, 17, 19};
+	std::vector<int> primes = {2, 11, 13, 17, 19};
 
 	int initial = 2520;
 
@@ -42,7 +30,7 @@ int question5() {
 	return initial;
 }
 
-int question9() {
+int Euler::question9() {
 	
 	for (int a = 1; a < 500; ++a) {
 		for (int b = 1; b < 500; ++b) {
@@ -69,9 +57,9 @@ int question9() {
 	return 0;
 }
 
-int question12() {
+int Euler::question12() {
 
-	vector<long> triangles;
+	std::vector<long> triangles;
 
 	for (int i = 12000; i < 20000; ++i) {
 		triangles.push_back(sumOf(i));
@@ -94,7 +82,7 @@ int question12() {
 	return 0;
 }
 
-int question14() {
+int Euler::question14() {
 	
 	int maxLen = 0;
 	int retVal = 0;
@@ -102,8 +90,8 @@ int question14() {
 	for (int i = 1; i < 1000000; ++i) {
 				
 		int len = 0;
-		uint numb = i;
-		auto lambda = [&numb] (uint) {
+		uint64 numb = i;
+		auto lambda = [&numb] (uint64) -> uint64 {
 			if (numb % 2 == 0) {
 				return numb / 2;
 			}
@@ -126,7 +114,7 @@ int question14() {
 	return retVal;
 }
 
-int question19() {
+int Euler::question19() {
 
 	int totalDays = 0;
 	for (int i = 1901; i <= 2000; ++i) {
@@ -149,38 +137,67 @@ int question19() {
 	return numbSundays;
 }
 
-int question20() {
-	int target = 100;
+int Euler::question22() {
 
-	uint sum = 0;
-	for(int i = 1; i < target; ++i) {
-		for(int j = 1; j < i; ++j) {
-			sum += j
-		}
+	std::vector<std::string> vec;
+
+	std::ifstream file("p022_names.txt");
+	std::string input;	
+	while (std::getline(file, input)) {
+		
 	}
 
-	return 0;
+	std::stringstream ss(input);
+
+	std::string token;
+
+	while (std::getline(ss, token, ',')) {
+		vec.push_back(token);
+	}
+
+	for (std::string &s : vec) {
+		s.erase(std::remove(s.begin(), s.end(), '\"'), s.end());
+	}
+
+	std::sort(vec.begin(), vec.end());
+
+	long total = 0;
+
+	for (int i = 0; i < vec.size(); ++i) {
+		
+		std::string s = vec[i];
+		
+		int strTotal = 0;
+		
+		for (char &c : s) {
+			strTotal += c - 64;
+		}	
+
+		total += strTotal * (i+1);
+	}
+
+	return total;
 }
 
-long sumOf(int n) {
+long Euler::sumOf(int n) {
 	return (n * (n + 1)) / 2;
 }
 
-bool isPrime(int number) {
-	if (number < 2) {
+bool Euler::isPrime(int n) {
+	if (n < 2) {
 		return false;
 	}
 
-	if (number == 2) {
+	if (n == 2) {
 		return true;
 	}
 
-	if (number % 2 == 0) {
+	if (n % 2 == 0) {
 		return false;
 	}
 
-	for (int i = 3; (i * i) <= number; i += 2) {
-		if (number % i == 0) {
+	for (int i = 3; (i * i) <= n; i += 2) {
+		if (n % i == 0) {
 			return false;
 		}
 	}
@@ -189,12 +206,13 @@ bool isPrime(int number) {
 }
 
 int main() {
-	cout << question19() << endl;
 
+	Euler e = Euler();
+
+	std::cout << e.question22() << std::endl;
 	int holder;
 
-	cin >> holder;
+	std::cin >> holder;
 
 	return 0;
 }
-
