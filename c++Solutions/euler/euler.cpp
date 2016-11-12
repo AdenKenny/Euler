@@ -209,7 +209,7 @@ int main() {
 
 	Euler e = Euler();
 
-	std::cout << e.question22() << std::endl;
+	std::cout << e.question25() << std::endl;
 	int holder;
 
 	std::cin >> holder;
