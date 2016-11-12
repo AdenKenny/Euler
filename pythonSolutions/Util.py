@@ -1,7 +1,7 @@
 class Util:
 	@staticmethod
-	def is_pal(num) -> bool:
-		num_str = str(num)
+	def is_pal(n: int) -> bool:
+		num_str = str(n)
 		
 		if num_str == num_str[::-1]:
 			return True
