@@ -7,6 +7,10 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <thread>
+#include <future>
+#include <math.h>
+#include <list>
 
 typedef unsigned __int64 uint64;
 
@@ -20,6 +24,7 @@ public:
 	int question5();
 	int question9();
 	int question12();
+	int question12Threads();
 	int question14();
 	int question19();
 	int question22();

@@ -2,7 +2,7 @@
 
 int Euler::question3() {
 	long long target = 600851475143;
-	int upperBound = sqrt(target);
+	int upperBound = round(sqrt(target));
 
 	int highest = 0;
 
@@ -54,6 +54,63 @@ int Euler::question9() {
 		}
 	}
 	
+	return 0;
+}
+
+int Euler::question12Threads() {
+
+	std::vector<long> triangles;
+
+	for (int i = 1; i < 20000; ++i) {
+		triangles.push_back(sumOf(i));
+	}
+
+	std::size_t const halfPoint = triangles.size() / 2;
+
+	std::vector<long> lo(triangles.begin(), triangles.begin() + halfPoint);
+	std::vector<long> hi(triangles.begin() + halfPoint, triangles.end());
+
+	std::vector<long> loLo(lo.begin(), lo.begin() + (lo.size() / 2));
+	std::vector<long> hiLo(lo.begin() + (lo.size() / 2), lo.end());
+	std::vector<long> loHi(hi.begin(), hi.begin() + (hi.size() / 2));
+	std::vector<long> hiHi(hi.begin() + (hi.size() / 2), hi.end());
+
+	auto checkFactors = [] (std::vector<long> vec) -> long {		
+
+		for (long &triangle : vec) {
+			int factors = 0;
+
+			for (long i = 1; i < (triangle / 2) + 1; ++i) {
+				
+				if (triangle % i == 0) {
+					factors++;
+				}
+			}
+
+			if (factors >= 500) {
+				return triangle;
+			}
+		}
+
+		return 0;
+	};
+
+	std::future<long> futures[] = { std::async(checkFactors, hiLo), std::async(checkFactors, loHi),
+		                            std::async(checkFactors, hiHi), std::async(checkFactors, loLo) };
+
+	for (unsigned int i = 0; i < 4; ++i) {
+		std::future<long> future = futures[i];
+	}
+
+	for (std::future<long> tFuture : futures) {
+		
+		long result = tFuture.get();
+
+		if (result != 0) {
+			return result;
+		}
+	}
+
 	return 0;
 }
 
@@ -163,7 +220,7 @@ int Euler::question22() {
 
 	long total = 0;
 
-	for (int i = 0; i < vec.size(); ++i) {
+	for (unsigned int i = 0; i < vec.size(); ++i) {
 		
 		std::string s = vec[i];
 		
@@ -209,7 +266,7 @@ int main() {
 
 	Euler e = Euler();
 
-	std::cout << e.question25() << std::endl;
+	std::cout << e.question12Threads() << std::endl;
 	int holder;
 
 	std::cin >> holder;

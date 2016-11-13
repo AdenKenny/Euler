@@ -333,8 +333,38 @@ def question_25() -> int:
 	
 	return 0
 	
+	
+def question_30() -> int:
+	
+	sum_total = 0
+	
+	for i in range(2, 1000000):
+		num_str = str(i)
+		
+		num_total = 0
+		
+		for j in num_str:
+			int_digit = int(j)
+			num_total += (int_digit ** 5)
+		
+		if num_total == i:
+			sum_total += num_total
+	
+	return sum_total
+		
+
+def question_31() -> int:
+	
+	coins = (1, 2, 5, 10, 20, 50, 100, 200)
+	target = 200
+	
+	permutations = [()]  # List of tuples of already tried combinations.
+	correct_permutations = [()]
+	
+	def create_perm() -> tuple:
+		pass
 
 def main():
-	print(question_25())
+	print(question_31())
 
 main()
