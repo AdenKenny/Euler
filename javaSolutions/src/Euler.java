@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Function;
@@ -86,8 +88,47 @@ public class Euler {
 		return stack.pop();
 	}
 
+	public long problem45() {
+				
+		Function<Integer, Long> tri = (val) -> {
+			return (long) (val * (val + 1) / 2);
+		};
+		
+		Function<Integer, Long> pent = (val) -> {
+			return (long) (val * (3 * val - 1) / 2);
+		};
+		
+		Function<Integer, Long> hex = (val) -> {
+			return (long) (val * (2 * val - 1));
+		};
+
+		List<Long> tris = new ArrayList<>();
+		Set<Long> pents = new HashSet<>();
+		Set<Long> hexs = new HashSet<>();
+
+		for (int i = 2; i < 1000000; ++i) {
+			tris.add(tri.apply(i));
+			pents.add(pent.apply(i));
+			hexs.add(hex.apply(i));
+		}
+						
+		List<Long> list = new ArrayList<>();
+		
+		for (Long i : tris) {
+			if (pents.contains(i) && hexs.contains(i)) {
+				list.add(i);
+			}
+		}
+		
+		System.out.println(list.size());
+		
+		Collections.sort(list);
+		
+		return list.get(0);
+	}
+	
 	public Euler() {
-		System.out.println(problem40());
+		System.out.println(problem45());
 	}
 
 	public static void main(String[] args) {

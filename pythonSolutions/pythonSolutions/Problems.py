@@ -363,6 +363,30 @@ def question_31() -> int:
         pass
 
 
+def problem_45() -> int:
+
+    tri = lambda n: n * (n + 1) / 2
+    pent = lambda n: n * (3 * n - 1) / 2
+    hex = lambda n: n * (2 * n - 1)
+
+    tris = []
+    pents = set()
+    hexes = set()
+
+    for i in range(2, 1000000):
+        tris.append(tri(i))
+        pents.add(pent(i))
+        hexes.add(hex(i))
+
+    list = []
+
+    for tri in tris:
+        if tri in pents and tri in hexes:
+            list.append(tri)
+
+    return list[1]
+
+
 def problem_48() -> int:
     val = 0
 
@@ -374,8 +398,28 @@ def problem_48() -> int:
     return str_val[-10:]
 
 
+def problem_55() -> int:
+
+    numb = 1
+
+    for i in range(197, 10000):
+
+        j = i
+        num_str = str(j)
+        rev = num_str[::-1]
+        num = int(rev)
+
+        count = 1
+
+        if Util.Util.is_pal(j):
+            numb += 1
+
+        elif count > 50:
+            pass
+    return 0
+
 def main():
-    print(problem_48())
+    print(problem_45())
 
 
 main()
