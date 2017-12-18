@@ -12,20 +12,19 @@
 #include <math.h>
 #include <list>
 
+#include "util.h"
+
 typedef unsigned __int64 uint64;
 
 class Euler {
-private:
-	long sumOf(int n);
-	bool isPrime(int n);
-
-public:
-	int question3();
-	int question5();
-	int question9();
-	int question12();
-	int question12Threads();
-	int question14();
-	int question19();
-	int question22();
+	public:
+		static int problem_3();
+		static int problem_5();
+		static int problem_9();
+		static int problem_12();
+		static int problem_12_threads();
+		static int problem_14();
+		static int problem_19();
+		static int problem_21();
+		static int problem_22();
 };

@@ -36,7 +36,48 @@ public class Euler {
 		return sum;
 	}
 
-	public int problem40() {
+
+	public static int problem23() {
+		
+		Function<Integer, Integer> divisorsSum = (n) -> {
+			
+			int sum = 0;
+			
+			for (int i = 1; i < n; ++i) {
+				if ((n % i) == 0) {
+					sum += i;
+				}
+			}
+			
+			return sum;
+		};
+		
+		List<Integer> abundantNums = new ArrayList<>();
+		
+		for (int i = 1; i < 15000; ++i) {
+			if (divisorsSum.apply(i) > i) {
+				abundantNums.add(i);
+			}
+		}
+		
+		int maxSum = 0;
+		
+		for (int i = 1; i < 28124; ++i) {
+			for (Integer abundant : abundantNums) {
+				for (Integer abundant2 : abundantNums) {
+					if (abundant + abundant2 == i) {
+						continue;
+					}
+				}
+				
+				maxSum += i;
+			}
+		}
+		
+		return maxSum;
+	}
+	
+	public static int problem40() {
 
 		StringBuilder build = new StringBuilder();
 		build.append(0);
@@ -58,7 +99,7 @@ public class Euler {
 		return total;
 	}
 
-	public int problem44() {
+	public static int problem44() {
 
 		Function<Integer, Integer> pent = (val) -> {
 			return val * (3 * val - 1) / 2;
@@ -88,7 +129,7 @@ public class Euler {
 		return stack.pop();
 	}
 
-	public long problem45() {
+	public static long problem45() {
 				
 		Function<Integer, Long> tri = (val) -> {
 			return (long) (val * (val + 1) / 2);
@@ -128,7 +169,7 @@ public class Euler {
 	}
 	
 	public Euler() {
-		System.out.println(problem45());
+		System.out.println(problem23());
 	}
 
 	public static void main(String[] args) {

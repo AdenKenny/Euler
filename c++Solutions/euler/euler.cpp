@@ -1,14 +1,14 @@
 #include "stdafx.h"
 
-int Euler::question3() {
-	long long target = 600851475143;
-	int upperBound = round(sqrt(target));
+int Euler::problem_3() {
+	uint64 target = 600851475143;
+	int upper_bound = round(sqrt(target));
 
 	int highest = 0;
 
-	for (int i = 1; i < upperBound; i++) {
+	for (int i = 1; i < upper_bound; i++) {
 		if (target % i == 0) {
-			if (isPrime(i)) {
+			if (Util::is_prime(i)) {
 				highest = i;
 			}
 		}
@@ -17,7 +17,7 @@ int Euler::question3() {
 	return highest;
 }
 
-int Euler::question5() {
+int Euler::problem_5() {
 
 	std::vector<int> primes = {2, 11, 13, 17, 19};
 
@@ -30,7 +30,7 @@ int Euler::question5() {
 	return initial;
 }
 
-int Euler::question9() {
+int Euler::problem_9() {
 	
 	for (int a = 1; a < 500; ++a) {
 		for (int b = 1; b < 500; ++b) {
@@ -57,12 +57,12 @@ int Euler::question9() {
 	return 0;
 }
 
-int Euler::question12Threads() {
+int Euler::problem_12_threads() {
 
 	std::vector<long> triangles;
 
 	for (int i = 1; i < 20000; ++i) {
-		triangles.push_back(sumOf(i));
+		triangles.push_back(Util::sum_of(i));
 	}
 
 	std::size_t const halfPoint = triangles.size() / 2;
@@ -95,31 +95,31 @@ int Euler::question12Threads() {
 		return 0;
 	};
 
-	std::future<long> futures[] = { std::async(checkFactors, hiLo), std::async(checkFactors, loHi),
-		                            std::async(checkFactors, hiHi), std::async(checkFactors, loLo) };
+	//std::future<long> futures[] = { std::async(checkFactors, hiLo), std::async(checkFactors, loHi),
+	//	                            std::async(checkFactors, hiHi), std::async(checkFactors, loLo) };
 
-	for (unsigned int i = 0; i < 4; ++i) {
-		std::future<long> future = futures[i];
-	}
+	//for (unsigned int i = 0; i < 4; ++i) {
+	//	std::future<long> future = futures[i];
+	//}
 
-	for (std::future<long> tFuture : futures) {
-		
-		long result = tFuture.get();
+	//for (std::future<long> tFuture : futures) {
+	//	
+	//	long result = tFuture.get();
 
-		if (result != 0) {
-			return result;
-		}
-	}
+	//	if (result != 0) {
+	//		return result;
+	//	}
+	//}
 
 	return 0;
 }
 
-int Euler::question12() {
+int Euler::problem_12() {
 
 	std::vector<long> triangles;
 
 	for (int i = 12000; i < 20000; ++i) {
-		triangles.push_back(sumOf(i));
+		triangles.push_back(Util::sum_of(i));
 	}
 
 	for (long &triangle : triangles) {
@@ -139,7 +139,7 @@ int Euler::question12() {
 	return 0;
 }
 
-int Euler::question14() {
+int Euler::problem_14() {
 	
 	int maxLen = 0;
 	int retVal = 0;
@@ -171,7 +171,7 @@ int Euler::question14() {
 	return retVal;
 }
 
-int Euler::question19() {
+int Euler::problem_19() {
 
 	int totalDays = 0;
 	for (int i = 1901; i <= 2000; ++i) {
@@ -194,7 +194,23 @@ int Euler::question19() {
 	return numbSundays;
 }
 
-int Euler::question22() {
+int Euler::problem_21() {
+	int total = 0;
+
+	for (int i = 1; i < 10000; ++i) {
+		int n1 = Util::sum_of_divisors(i);
+		int n2 = Util::sum_of_divisors(Util::sum_of_divisors(i));
+
+		if (n2 == i && i < n1) {
+			total += i + n1;
+		}
+	}
+
+	return total;
+
+}
+
+int Euler::problem_22() {
 
 	std::vector<std::string> vec;
 
@@ -236,37 +252,9 @@ int Euler::question22() {
 	return total;
 }
 
-long Euler::sumOf(int n) {
-	return (n * (n + 1)) / 2;
-}
-
-bool Euler::isPrime(int n) {
-	if (n < 2) {
-		return false;
-	}
-
-	if (n == 2) {
-		return true;
-	}
-
-	if (n % 2 == 0) {
-		return false;
-	}
-
-	for (int i = 3; (i * i) <= n; i += 2) {
-		if (n % i == 0) {
-			return false;
-		}
-	}
-
-	return true;
-}
-
 int main() {
 
-	Euler e = Euler();
-
-	std::cout << e.question12Threads() << std::endl;
+	std::cout << Euler::problem_21() << std::endl;
 	int holder;
 
 	std::cin >> holder;
