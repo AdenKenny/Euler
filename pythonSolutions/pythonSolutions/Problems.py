@@ -1,4 +1,6 @@
 import math
+from functools import reduce
+
 from pythonSolutions import Util
 
 """
@@ -9,7 +11,7 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 """
 
 
-def question_1() -> int:
+def problem_1() -> int:
     list_numbs = []
 
     for i in range(1, 1000):
@@ -34,7 +36,7 @@ exceed four million, find the sum of the even-valued terms.
 """
 
 
-def question_2() -> int:
+def problem_2() -> int:
     last = 1
     last_2 = 1
 
@@ -59,7 +61,7 @@ What is the largest prime factor of the number 600851475143 ?
 """
 
 
-def question_3() -> int:
+def problem_3() -> int:
     target = 600851475143
     upper_bound = int(math.sqrt(target))
 
@@ -83,7 +85,7 @@ numbers.
 """
 
 
-def question_4() -> int:
+def problem_4() -> int:
     highest = 0
 
     for i in range(100, 999):
@@ -103,7 +105,7 @@ What is the smallest positive number that is evenly divisible by all of the numb
 """
 
 
-def question_5() -> int:
+def problem_5() -> int:
     primes = (2, 11, 13, 17, 19)
 
     initial = 2520
@@ -114,7 +116,7 @@ def question_5() -> int:
     return initial
 
 
-def question_6() -> int:
+def problem_6() -> float:
     target = 100
 
     sum_of_squares = 0
@@ -127,7 +129,7 @@ def question_6() -> int:
     return (sum_of_numbers * sum_of_numbers) - sum_of_squares
 
 
-def question_7() -> int:
+def problem_7() -> int:
     numb = 0
     target = 10001
 
@@ -138,7 +140,7 @@ def question_7() -> int:
                 return i
 
 
-def question_8() -> int:
+def problem_8() -> int:
     num = 0  # Number omitted as is 1000 digits.
 
     prod = 1
@@ -159,7 +161,49 @@ def question_8() -> int:
     return max_prod
 
 
-def question_13() -> int:
+def problem_11():
+
+    grid = [[8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8], [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0], [81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65], [52, 70, 95, 23, 4, 60, 11, 42, 69, 24, 68, 56, 1, 32, 56, 71, 37, 2, 36, 91], [22, 31, 16, 71, 51, 67, 63, 89, 41, 92, 36, 54, 22, 40, 40, 28, 66, 33, 13, 80], [24, 47, 32, 60, 99, 3, 45, 2, 44, 75, 33, 53, 78, 36, 84, 20, 35, 17, 12, 50], [32, 98, 81, 28, 64, 23, 67, 10, 26, 38, 40, 67, 59, 54, 70, 66, 18, 38, 64, 70], [67, 26, 20, 68, 2, 62, 12, 20, 95, 63, 94, 39, 63, 8, 40, 91, 66, 49, 94, 21], [24, 55, 58, 5, 66, 73, 99, 26, 97, 17, 78, 78, 96, 83, 14, 88, 34, 89, 63, 72], [21, 36, 23, 9, 75, 0, 76, 44, 20, 45, 35, 14, 0, 61, 33, 97, 34, 31, 33, 95], [78, 17, 53, 28, 22, 75, 31, 67, 15, 94, 3, 80, 4, 62, 16, 14, 9, 53, 56, 92], [16, 39, 5, 42, 96, 35, 31, 47, 55, 58, 88, 24, 0, 17, 54, 24, 36, 29, 85, 57], [86, 56, 0, 48, 35, 71, 89, 7, 5, 44, 44, 37, 44, 60, 21, 58, 51, 54, 17, 58], [19, 80, 81, 68, 5, 94, 47, 69, 28, 73, 92, 13, 86, 52, 17, 77, 4, 89, 55, 40], [4, 52, 8, 83, 97, 35, 99, 16, 7, 97, 57, 32, 16, 26, 26, 79, 33, 27, 98, 66], [88, 36, 68, 87, 57, 62, 20, 72, 3, 46, 33, 67, 46, 55, 12, 32, 63, 93, 53, 69], [4, 42, 16, 73, 38, 25, 39, 11, 24, 94, 72, 18, 8, 46, 29, 32, 40, 62, 76, 36], [20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74, 4, 36, 16], [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54], [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]]
+    grid_size = 20
+
+    max_prod = -1
+
+    for y in range(0, grid_size):
+        y_row = grid[y]
+
+        for x in range(0, grid_size):
+            if (x + 3) < grid_size:
+                prod = reduce(lambda a, b: a * b, y_row[x:x + 4])
+                if prod > max_prod:
+                    max_prod = prod
+
+        if (y + 3) < grid_size:
+            ks = grid[y: y + 4]
+
+            for x2 in range(0, grid_size):
+                prod = 1
+                for row in ks:
+                    prod *= row[x2]
+
+                if prod > max_prod:
+                    max_prod = prod
+
+
+
+        # tmp = x
+        # for y in range(0, grid_size):
+        #     k = grid[tmp][y]
+        #     tmp += 1
+        #     print(k)
+
+
+
+
+
+    return max_prod
+
+
+def problem_13() -> int:
     numb = (37107287533902102798797998220837590246510135740250,
             46376937677490009712648124896970078050417018260538,
             74324986199524741059474233309513058123726617309629,
@@ -266,7 +310,7 @@ def question_13() -> int:
     return int(full_numb[0:10])
 
 
-def question_16() -> int:
+def problem_16() -> int:
     numb = 2 ** 1000
 
     numb = str(numb)
@@ -278,11 +322,11 @@ def question_16() -> int:
     return t_sum
 
 
-def question_17() -> int:
+def problem_17() -> int:
     letters = {1: 3, 2: 3, 3: 5, 4: 4, 5: 4}
 
 
-def question_18() -> int:
+def problem_18() -> int:
     row1 = (1,)
     row2 = (95, 64)
     row3 = (17, 47, 82)
@@ -305,7 +349,7 @@ def question_18() -> int:
         total = 1
 
 
-def question_20() -> int:
+def problem_20() -> int:
     target = 100
 
     total_fact = math.factorial(target)
@@ -314,7 +358,7 @@ def question_20() -> int:
     return sum((int(x) for x in fact_str))
 
 
-def question_25() -> int:
+def problem_25() -> int:
     last = 1
     last_2 = 1
 
@@ -334,7 +378,7 @@ def question_25() -> int:
     return 0
 
 
-def question_30() -> int:
+def problem_30() -> int:
     sum_total = 0
 
     for i in range(2, 1000000):
@@ -352,7 +396,7 @@ def question_30() -> int:
     return sum_total
 
 
-def question_31() -> int:
+def problem_31() -> int:
     coins = (1, 2, 5, 10, 20, 50, 100, 200)
     target = 200
 
@@ -418,8 +462,10 @@ def problem_55() -> int:
             pass
     return 0
 
+
 def main():
-    print(problem_45())
+    print(problem_11())
 
 
-main()
+if __name__ == "__main__":
+    main()

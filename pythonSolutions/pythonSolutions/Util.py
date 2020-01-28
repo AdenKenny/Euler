@@ -8,7 +8,8 @@ class Util:
 		
 		return False
 
-	def is_pal(n: str) -> bool:
+	@staticmethod
+	def is_pal_str(n: str) -> bool:
 		if str == str[::-1]:
 			return True
 
