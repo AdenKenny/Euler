@@ -333,6 +333,24 @@ def question_25() -> int:
 
     return 0
 
+def problem_26():
+    longest = -1
+    num = -1
+
+    for i in range(3, 1001, 2):
+        if i % 5 == 0:
+            continue
+
+        p = 1
+        while (10 ** p) % i != 1:
+            p += 1
+
+        if p > longest:
+            longest = p
+            num = i
+
+    print(num, longest)
+
 
 def question_30() -> int:
     sum_total = 0
