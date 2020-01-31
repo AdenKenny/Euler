@@ -379,7 +379,6 @@ def problem_25() -> int:
             return count
 
 
-
 def problem_26():
     longest = -1
     num = -1
@@ -397,6 +396,16 @@ def problem_26():
             num = i
 
     print(num, longest)
+
+
+def problem_29():
+    a = set()
+
+    for i in range(2, 101):
+        for j in range(2, 101):
+            a.add(i ** j)
+
+    return len(a)
 
 
 def problem_30() -> int:
@@ -417,7 +426,7 @@ def problem_30() -> int:
     return sum_total
 
 
-def problem_31() -> int:
+def problem_31():
     coins = (1, 2, 5, 10, 20, 50, 100, 200)
     target = 200
 
@@ -450,6 +459,24 @@ def problem_45() -> int:
             list.append(tri)
 
     return list[1]
+
+
+def problem_34():
+
+    total = 0
+
+    for i in range(3, 1000000):
+        s_n = str(i)
+
+        int_sum = 0
+
+        for c in s_n:
+            int_sum += math.factorial(int(c))
+
+        if int_sum == i:
+            total += i
+
+    return total
 
 
 def problem_48():
@@ -507,7 +534,7 @@ def problem_55() -> int:
 
 
 def main():
-    print(problem_52())
+    print(problem_34())
 
 
 main()
