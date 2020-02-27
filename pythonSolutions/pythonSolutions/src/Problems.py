@@ -1,8 +1,6 @@
 import math
 from functools import reduce
 
-from pythonSolutions import Util
-
 """
 If we list all the natural numbers below10 that are multiples
 of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -69,7 +67,7 @@ def problem_3() -> int:
 
     for i in range(1, upper_bound):
         if target % i == 0:
-            if Util.Util.is_prime(i):
+            if Util.is_prime(i):
                 highest = i
 
     return highest
@@ -91,7 +89,7 @@ def problem_4() -> int:
     for i in range(100, 999):
         for j in range(100, 999):
             prod = i * j
-            if Util.Util.is_pal(prod):
+            if Util.is_pal(prod):
                 if prod > highest:
                     highest = prod
 
@@ -134,7 +132,7 @@ def problem_7() -> int:
     target = 10001
 
     for i in range(2, 1000000):
-        if Util.Util.is_prime(i):
+        if Util.is_prime(i):
             numb += 1
             if numb == target:
                 return i
@@ -511,7 +509,6 @@ def problem_52():
             return i
 
 
-
 def problem_55() -> int:
 
     numb = 1
@@ -525,7 +522,7 @@ def problem_55() -> int:
 
         count = 1
 
-        if Util.Util.is_pal(j):
+        if Util.is_pal(j):
             numb += 1
 
         elif count > 50:
@@ -537,4 +534,31 @@ def main():
     print(problem_34())
 
 
-main()
+if __name__ == "__main__":
+    main()
+
+
+class Util:
+    @staticmethod
+    def is_pal(n: int) -> bool:
+        num_str = str(n)
+
+        if num_str == num_str[::-1]:
+            return True
+
+        return False
+
+    @staticmethod
+    def is_pal_str(n: str) -> bool:
+        if str == str[::-1]:
+            return True
+
+        return False
+
+    @staticmethod
+    def is_prime(n: int) -> bool:
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+
+        return True
