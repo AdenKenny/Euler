@@ -1,5 +1,7 @@
 import math
 from functools import reduce
+import itertools
+
 
 """
 If we list all the natural numbers below10 that are multiples
@@ -67,7 +69,7 @@ def problem_3() -> int:
 
     for i in range(1, upper_bound):
         if target % i == 0:
-            if Util.is_prime(i):
+            if is_prime(i):
                 highest = i
 
     return highest
@@ -89,7 +91,7 @@ def problem_4() -> int:
     for i in range(100, 999):
         for j in range(100, 999):
             prod = i * j
-            if Util.is_pal(prod):
+            if is_pal(prod):
                 if prod > highest:
                     highest = prod
 
@@ -132,7 +134,7 @@ def problem_7() -> int:
     target = 10001
 
     for i in range(2, 1000000):
-        if Util.is_prime(i):
+        if is_prime(i):
             numb += 1
             if numb == target:
                 return i
@@ -488,6 +490,19 @@ def problem_48():
     return str_val[-10:]
 
 
+def problem_49():
+
+    for increase in range(1000, 9000):
+        for j in range(1000, 9999):
+            second = j + increase
+            third = second + increase
+            if is_prime(j) and is_prime(second) and is_prime(third):
+                perms = list(itertools.permutations((str(j))))
+                perms = list(map(lambda x: ''.join(x), perms))
+                if str(second) in perms and str(third) in perms and j != 1487:
+                    return f'{j}{second}{third}'
+    return -1
+
 def problem_52():
     for i in range(1, 200000):
 
@@ -522,7 +537,7 @@ def problem_55() -> int:
 
         count = 1
 
-        if Util.is_pal(j):
+        if is_pal(j):
             numb += 1
 
         elif count > 50:
@@ -530,35 +545,42 @@ def problem_55() -> int:
     return 0
 
 
+def is_pal(n: int) -> bool:
+    num_str = str(n)
+
+    if num_str == num_str[::-1]:
+        return True
+
+    return False
+
+def is_pal_str(n: str) -> bool:
+    if str == str[::-1]:
+        return True
+
+    return False
+
+def is_prime(n: int) -> bool:
+
+    if n < 2:
+        return False
+
+    if n == 2:
+        return True
+
+    if not n & 1:
+        return False
+
+    for i in range(3, int(n ** 0.5) + 1, 2):
+        if n % i == 0:
+            return False
+
+    return True
+
+
 def main():
-    print(problem_34())
+    print(problem_49())
 
 
 if __name__ == "__main__":
     main()
 
-
-class Util:
-    @staticmethod
-    def is_pal(n: int) -> bool:
-        num_str = str(n)
-
-        if num_str == num_str[::-1]:
-            return True
-
-        return False
-
-    @staticmethod
-    def is_pal_str(n: str) -> bool:
-        if str == str[::-1]:
-            return True
-
-        return False
-
-    @staticmethod
-    def is_prime(n: int) -> bool:
-        for i in range(2, int(n ** 0.5) + 1):
-            if n % i == 0:
-                return False
-
-        return True
