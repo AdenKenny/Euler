@@ -199,10 +199,6 @@ def problem_11():
                 if prod > max_prod:
                     max_prod = prod
 
-
-
-
-
     return max_prod
 
 
@@ -325,33 +321,6 @@ def problem_16() -> int:
     return t_sum
 
 
-def problem_17() -> int:
-    letters = {1: 3, 2: 3, 3: 5, 4: 4, 5: 4}
-
-
-def problem_18() -> int:
-    row1 = (1,)
-    row2 = (95, 64)
-    row3 = (17, 47, 82)
-    row4 = (18, 35, 87, 10)
-    row5 = (20, 4, 82, 47, 65)
-    row6 = (19, 1, 23, 75, 3, 34)
-    row7 = (88, 2, 77, 73, 7, 63, 67)
-    row8 = (99, 65, 4, 28, 6, 16, 70, 92)
-    row9 = (41, 41, 26, 56, 83, 40, 80, 70, 33)
-    row10 = (41, 48, 72, 33, 47, 32, 37, 16, 94, 29)
-    row11 = (53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14)
-    row12 = (70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57)
-    row13 = (91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48)
-    row14 = (63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31)
-    row15 = (4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23)
-
-    highest = 0
-
-    for i in row2:
-        total = 1
-
-
 def problem_20() -> int:
     target = 100
 
@@ -437,28 +406,21 @@ def problem_31():
         pass
 
 
-def problem_45() -> int:
+def problem_32():
+    products = set()
 
-    tri = lambda n: n * (n + 1) / 2
-    pent = lambda n: n * (3 * n - 1) / 2
-    hex = lambda n: n * (2 * n - 1)
+    pandigitals = {'1', '2', '3', '4', '5', '6', '7', '8', '9'}
+    pandigitals = set(map(lambda x: ''.join(x), list(itertools.permutations(pandigitals))))
 
-    tris = []
-    pents = set()
-    hexes = set()
-
-    for i in range(2, 1000000):
-        tris.append(tri(i))
-        pents.add(pent(i))
-        hexes.add(hex(i))
-
-    list = []
-
-    for tri in tris:
-        if tri in pents and tri in hexes:
-            list.append(tri)
-
-    return list[1]
+    for i in range(0, 10000):
+        for j in range(0, 10000):
+            product = i * j
+            if len(str(product) + str(i) + str(j)) > 9:
+                break
+            mmp_identity = f'{i}{j}{product}'
+            if mmp_identity in pandigitals:
+                products.add(product)
+    return sum(products)
 
 
 def problem_34():
@@ -487,6 +449,30 @@ def problem_41():
                 largest = i
 
     return largest
+
+
+def problem_45() -> int:
+
+    tri = lambda n: n * (n + 1) / 2
+    pent = lambda n: n * (3 * n - 1) / 2
+    hex = lambda n: n * (2 * n - 1)
+
+    tris = []
+    pents = set()
+    hexes = set()
+
+    for i in range(2, 1000000):
+        tris.append(tri(i))
+        pents.add(pent(i))
+        hexes.add(hex(i))
+
+    list = []
+
+    for tri in tris:
+        if tri in pents and tri in hexes:
+            list.append(tri)
+
+    return list[1]
 
 
 def problem_48():
@@ -592,11 +578,11 @@ def is_prime(n: int) -> bool:
 
 def is_pandigital(n):
     n = str(n)
-    if len(set(n)) != len(n):
+    length = len(n)
+    n_set = set(n)
+    if len(n_set) != length:
         return False
 
-    length = len(n)
-    n_set = set(str(n))
     for i in range(1, length + 1):
         if str(i) not in n_set:
             return False
@@ -605,7 +591,7 @@ def is_pandigital(n):
 
 
 def main():
-    print(problem_41())
+    print(problem_32())
 
 
 if __name__ == "__main__":
