@@ -479,6 +479,16 @@ def problem_34():
     return total
 
 
+def problem_41():
+    largest = -1
+    for i in range(1, 9876543):
+        if is_pandigital(i) and is_prime(i):
+            if i > largest:
+                largest = i
+
+    return largest
+
+
 def problem_48():
     val = 0
 
@@ -502,6 +512,7 @@ def problem_49():
                 if str(second) in perms and str(third) in perms and j != 1487:
                     return f'{j}{second}{third}'
     return -1
+
 
 def problem_52():
     for i in range(1, 200000):
@@ -553,11 +564,13 @@ def is_pal(n: int) -> bool:
 
     return False
 
+
 def is_pal_str(n: str) -> bool:
     if str == str[::-1]:
         return True
 
     return False
+
 
 def is_prime(n: int) -> bool:
 
@@ -577,8 +590,22 @@ def is_prime(n: int) -> bool:
     return True
 
 
+def is_pandigital(n):
+    n = str(n)
+    if len(set(n)) != len(n):
+        return False
+
+    length = len(n)
+    n_set = set(str(n))
+    for i in range(1, length + 1):
+        if str(i) not in n_set:
+            return False
+
+    return True
+
+
 def main():
-    print(problem_49())
+    print(problem_41())
 
 
 if __name__ == "__main__":
