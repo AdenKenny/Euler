@@ -1,6 +1,7 @@
 import math
 from functools import reduce
 import itertools
+import string
 
 
 """
@@ -451,6 +452,32 @@ def problem_41():
     return largest
 
 
+def problem_42():
+
+    triangles = set()
+
+    for i in range(0, 50):
+        triangles.add((0.5 * i) * (i + 1))
+
+    problem_file_name = "../files/p042_words.txt"
+    with open(problem_file_name) as f:
+        lines = f.readline()
+        splitted = lines.split(',')
+        splitted = [s[1:-1] for s in splitted]
+
+        tri_count = 0
+
+        for word in splitted:
+            word = word.lower()
+            word_total = 0
+            for c in word:
+                word_total += (ord(c) - 96)
+            if word_total in triangles:
+                tri_count += 1
+
+    return tri_count
+
+
 def problem_45() -> int:
 
     tri = lambda n: n * (n + 1) / 2
@@ -591,7 +618,7 @@ def is_pandigital(n):
 
 
 def main():
-    print(problem_32())
+    print(problem_42())
 
 
 if __name__ == "__main__":
