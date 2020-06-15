@@ -357,7 +357,7 @@ def problem_23():
     for i in range(1, upper_limit):
         if i not in target_nums:
             final_nums.append(i)
-            
+
     return sum(final_nums)
 
 
@@ -470,6 +470,24 @@ def problem_34():
             total += i
 
     return total
+
+
+def problem_37():
+    nums = []
+    for i in range(11, 800000):
+        if is_prime(i):
+            is_good = True
+            str_i = str(i)
+            for j in range(1, len(str_i)):
+                num = str_i[j:]
+                if not is_prime(int(num)):
+                    is_good = False
+                num = str_i[:j]
+                if not is_prime(int(num)):
+                    is_good = False
+            if is_good:
+                nums.append(i)
+    return sum(nums)
 
 
 def problem_41():
@@ -656,7 +674,7 @@ def is_pandigital(n):
 
 
 def main():
-    print(problem_23())
+    print(problem_37())
 
 
 if __name__ == "__main__":
