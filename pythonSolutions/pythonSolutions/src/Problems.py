@@ -331,6 +331,36 @@ def problem_20() -> int:
     return sum((int(x) for x in fact_str))
 
 
+def problem_23():
+    upper_limit = 28123
+    abundant_numbers = []
+    for i in range(1, upper_limit):
+        divisors = get_divisors(i)
+        sum_of_divisors = sum(divisors)
+        if sum_of_divisors > i:
+            abundant_numbers.append(i)
+
+    target_nums = []
+    for k in range(1, upper_limit):
+        j = len(abundant_numbers)
+        i = 0
+        while i < j:
+            _sum = abundant_numbers[i] + abundant_numbers[j - 1]
+            if _sum < k:
+                i += 1
+            elif _sum > k:
+                j -= 1
+            else:
+                target_nums.append(k)
+                break
+    final_nums = []
+    for i in range(1, upper_limit):
+        if i not in target_nums:
+            final_nums.append(i)
+            
+    return sum(final_nums)
+
+
 def problem_25() -> int:
     last = 1
     last_2 = 1
@@ -603,6 +633,14 @@ def is_prime(n: int) -> bool:
     return True
 
 
+def get_divisors(n):
+    divs = [1]
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            divs.extend(([i, int(n / i)]))
+    return list(set(divs))
+
+
 def is_pandigital(n):
     n = str(n)
     length = len(n)
@@ -618,7 +656,7 @@ def is_pandigital(n):
 
 
 def main():
-    print(problem_42())
+    print(problem_23())
 
 
 if __name__ == "__main__":
