@@ -550,6 +550,31 @@ def problem_45() -> int:
     return list[1]
 
 
+def problem_46():
+
+    primes = generate_primes(700)
+
+    for i in range(3, 10000, 2):
+        is_good = False
+        if not is_prime(i) and i % 2 != 0:
+            for p in primes:
+                if p > i:
+                    break
+                for sq in range(1, 500):
+                    if sq > i:
+                        break
+                    potential = (sq ** 2) * 2 + p
+                    if potential == i:
+                        print(f'{i} = {p} + 2 * {sq}^2')
+                        is_good = True
+                        i += 1
+                        break
+            if not is_good:
+                return i
+            
+    return -1
+
+
 def problem_48():
     val = 0
 
@@ -673,8 +698,20 @@ def is_pandigital(n):
     return True
 
 
+def generate_primes(n):
+    primes = []
+
+    i = 0
+    while len(primes) < n:
+        if is_prime(i):
+            primes.append(i)
+        i += 1
+
+    return primes
+
+
 def main():
-    print(problem_37())
+    print(problem_46())
 
 
 if __name__ == "__main__":
